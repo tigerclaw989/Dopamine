@@ -50,6 +50,13 @@ jobs:
           rm $THEOS/sdks/iPhoneOS16.5.sdk.tar
           cd $BASEDIR
           
+      - name: Build and Install trustcache
+        run: |
+          set -x
+          git clone https://github.com/CRKatri/trustcache
+          cd trustcache
+          gmake -j$(sysctl -n hw.physicalcpu) OPENSSL=1
+          sudo cp trustcache /opt/procursus/bin/
       - name: Build
         run: |
           set -x
